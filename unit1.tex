@@ -1,0 +1,52 @@
+%\documentclass[draft,hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[handout]{beamer}
+\let\Tiny=\tiny
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{verbatim}
+%\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Boadilla}
+
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+\useinnertheme{rounded}
+\useoutertheme{smoothbars}
+%\useoutertheme{sidebar}
+
+\definecolor{lGray}{gray}{.90}
+
+\newcommand{\code}[1]{\colorbox{lGray}{\texttt{#1}}}
+\author{Christian Kniep}
+
+\begin{document}
+\title[TITLE]{Some title}  
+\institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
+\date[\today]{\today} 
+
+\begin{frame}
+	\titlepage
+\end{frame} 
+
+\begin{frame}
+	\frametitle{Table of content}
+	\tableofcontents
+\end{frame} 
+
+
+\section{Section1} 
+	\subsection{Subsection1.1}
+		\begin{frame}
+			\frametitle{Frametitle}
+			\begin{itemize}
+				\item<1-> A Bulletpoint
+                \begin{itemize}
+                    \item<2-> Subbullet
+                \end{itemize}
+            \end{itemize}
+		\end{frame}
+
+\end{document}
