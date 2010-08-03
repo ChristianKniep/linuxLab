@@ -23,7 +23,7 @@
 \author{Christian Kniep}
 
 \begin{document}
-\title[TITLE]{Some title}  
+\title[TITLE]{Linux Lab}  
 \institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
 \date[\today]{\today} 
 
@@ -37,16 +37,122 @@
 \end{frame} 
 
 
-\section{Section1} 
-	\subsection{Subsection1.1}
-		\begin{frame}
-			\frametitle{Frametitle}
+\section{Introduction} 
+	\subsection{get to know the terminal}
+		\begin{frame}[fragile]
+			\frametitle{log in a remote computer}
 			\begin{itemize}
-				\item<1-> A Bulletpoint
+				\item<1-> First you have to log on the remote computer \\
+                        \begin{verbatim}
+$ ssh user@192.168.3.221
+user@192.168.3.221's password: 
+\end{verbatim}
+                \item<2-> Your usernames: \\ \ \\
+                \begin{tabular}{|l|l|} \hline
+                aegedio & maria \\ \hline
+                ryan & sintikhe \\ \hline
+                christian & yoseph \\ \hline
+                \end{tabular}
+            \end{itemize}
+		\end{frame}
+        \begin{frame}
+			\frametitle{look around}
+			\begin{itemize}
+                \item<1-> who am i \code{whoami}
+                \item<2-> where am i \code{pwd} \textbf{P}ath\textbf{W}orking\textbf{D}irectory
+				\item<3-> List your home-directory \code{ls}
+                \item<4-> OK, its empty. So create a directory \code{mkdir fstDir}
+                \item<5-> Whats the difference between
                 \begin{itemize}
-                    \item<2-> Subbullet
+                    \item<5-> \code{ls}
+                    \item<5-> \code{ls -l}
+                    \item<5-> \code{ls -la}                    
                 \end{itemize}
             \end{itemize}
 		\end{frame}
-
+\section{Listings \& Permissions}
+    \subsection{ls-Command}
+       \begin{frame}[fragile]
+			\frametitle{what does it mean?}
+			\begin{itemize}
+                \item<1-> \code{drwxr-xr-xr-x 2 test test 4096 2010-08-03 13:58 fstDir}
+				\item<2-> what are these informations all about?\\
+                $\underbrace{\code{d}}_{\text{\tiny{type}}}
+                \underbrace{\code{rwx}}_{\text{\tiny{owner perm.}}}\ \ 
+                \underbrace{\code{r-x}}_{\text{\tiny{group perm.}}}\ \ 
+                \underbrace{\code{r-x}}_{\text{\tiny{all perm.}}}\ \
+                \underbrace{\code{2}}_{\text{\tiny{\# links}}}\ \ 
+                \underbrace{\code{test}}_{\text{\tiny{owner}}}\ 
+                \underbrace{\code{test}}_{\text{\tiny{group}}}$ \\
+                $\underbrace{\code{4096}}_{\text{\tiny{size}}}\ 
+                \underbrace{\code{2010-08-03}}_{\text{\tiny{date last altered}}}\ 
+                \underbrace{\code{13:58}}_{\text{\tiny{time last altered}}}\ 
+                \underbrace{\code{fstDir}}_{\text{\tiny{name}}}$
+            \end{itemize}
+		\end{frame}
+    \subsection{Types}
+        \begin{frame}
+			\frametitle{a few types you might encounter}
+			\begin{itemize}
+                \item<1-> Basic types are: \\
+                \begin{tabular}{cl}
+                    short & description \\ \hline
+                    - & regular file \\
+                    d & directory \\
+                    l & symbolic link (reference)
+                \end{tabular}
+            \end{itemize}
+		\end{frame}
+    \subsection{Permissions}
+        \begin{frame}
+			\frametitle{rwx?}
+			\begin{itemize}
+                \item<1-> Basic permissions are: \\
+                \begin{tabular}{clll}
+                    short & long & file-context & dir-context \\ \hline
+                    r & read & view the file & the dir is shown in \code{ls} \\
+                    w & write & alter the file & create files/dir \\
+                    x & execute & execute a file & enter the directory
+                \end{tabular}
+            \end{itemize}
+		\end{frame}
+    \subsection{Examples}
+        \begin{frame}
+			\frametitle{create, move, remove, read and write}
+			\begin{itemize}
+                \item<1-> the simplest way to create a file is \code{touch file}
+                \item<2-> if you want to edit it you use \code{vim file}
+                \begin{itemize}
+                    \item<2-> now you are in the neutral mode
+                    \item<3-> to edit the file type \code{i}, now there has to be the string \code{-- INSERT --} on the left buttom
+                    \item<3-> now insert some stuff into your file
+                    \item<4-> if you want to undo the last insertion go to the neutral mode (type \code{ESC} until the left buttom is clean) and type \code{u}
+                    \item<5-> to write the file change to the neutral mode and type \code{:w}
+                    \item<6-> quitting is the command \code{:q}
+                    \item<6-> its possible to do \code{:wq}
+                \end{itemize}
+            \end{itemize}
+		\end{frame}
+        \begin{frame}
+			\frametitle{create, move, remove, read and write}
+			\begin{itemize}
+                \item<1-> move (equal to rename) is \code{mv file file1}
+                \item<1-> remove (equal to rename) is \code{rm file}
+            \end{itemize}
+		\end{frame}
+        
+        \begin{frame}
+			\frametitle{lets play}
+			\begin{itemize}
+                \item<1-> \textbf{C}hange the \textbf{D}irectory \code{cd /home/test/linuxLab/}
+                \item<2-> have a look around, what do you see
+                \item<3-> try this in the current and in the subdirs
+                \begin{enumerate}
+                    \item<4-> create a file named as your user 
+                    \item<4-> insert your full name to it (use vim)
+                    \item<5-> add 1 to the name (rename it to \textless username\textgreater 1)
+                \end{enumerate}
+            \end{itemize}
+		\end{frame}
+    
 \end{document}
