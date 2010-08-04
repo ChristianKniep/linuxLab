@@ -1,0 +1,70 @@
+%\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[draft,handout]{beamer}
+\let\Tiny=\tiny
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{verbatim}
+%\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Boadilla}
+
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+\useinnertheme{rounded}
+\useoutertheme{smoothbars}
+%\useoutertheme{sidebar}
+
+\definecolor{lGray}{gray}{.90}
+\newcommand{\code}[1]{\colorbox{lGray}{\texttt{#1}}}
+
+\author{Christian Kniep}
+
+\begin{document}
+\title[Linux Lab Unit 2]{Linux Lab Unit 2}  
+\institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
+\date[\today]{\today} 
+
+\begin{frame}
+	\titlepage
+\end{frame} 
+
+\begin{frame}
+	\frametitle{Table of content}
+	\tableofcontents
+\end{frame} 
+
+\section{Handle the output}
+    \subsection{stdout,stderr}
+        \begin{frame}
+			\frametitle{output,pipes}
+			\begin{itemize}
+                \item<1-> if you fire a command the output will go trough the Terminal
+                \item<2-> dump it
+                \begin{itemize}
+                    \item<2-> a new file \code{ls -l \textgreater list}
+                    \item<3-> append it to a file \code{ls -l \textgreater\textgreater list}
+                \end{itemize}
+                \item<4-> if you want to process it, pipe it in another process \code{ls -l |}
+                \begin{itemize}
+                    \item<4-> search for line with pattern \code{ls -l |grep pattern}
+                    \item<5-> the first two lines of the output \code{ls -l |head -n2}
+                    \item<6-> the last two lines of the output 
+                    \item<7-> \code{ls -l |tail -n2}
+                \end{itemize}
+                
+            \end{itemize}
+        \end{frame}
+        \begin{frame}
+			\frametitle{environment}
+			\begin{itemize}
+                \item<1-> Where are all the commands located?
+                \item[$\Rightarrow$]<2-> depends :) Mostly \code{/bin}, \code{/usr/bin}, \code{/usr/local/bin}
+                \item<3-> But how does Linux know where to look?
+                \item[$\Rightarrow$]<2-> Environment. Try \code{echo \$PATH}
+            \end{itemize}
+        \end{frame}
+    
+\end{document}

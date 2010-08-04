@@ -1,5 +1,5 @@
-%\documentclass[draft,hyperref={pdfpagelabels=false}]{beamer}
-\documentclass[handout]{beamer}
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+%\documentclass[draft,handout]{beamer}
 \let\Tiny=\tiny
 \hypersetup{pdfpagemode=FullScreen}
 \usepackage[ngerman]{babel}
@@ -18,12 +18,12 @@
 %\useoutertheme{sidebar}
 
 \definecolor{lGray}{gray}{.90}
-
 \newcommand{\code}[1]{\colorbox{lGray}{\texttt{#1}}}
+
 \author{Christian Kniep}
 
 \begin{document}
-\title[TITLE]{Linux Lab}  
+\title[Linux Lab]{Linux Lab}  
 \institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
 \date[\today]{\today} 
 
@@ -58,8 +58,8 @@ user@192.168.3.221's password:
         \begin{frame}
 			\frametitle{look around}
 			\begin{itemize}
-                \item<1-> who am i \code{whoami}
-                \item<2-> where am i \code{pwd} \textbf{P}ath\textbf{W}orking\textbf{D}irectory
+                \item<1-> who am I \code{whoami}
+                \item<2-> where am I \code{pwd} \textbf{P}ath\textbf{W}orking\textbf{D}irectory
 				\item<3-> List your home-directory \code{ls}
                 \item<4-> OK, its empty. So create a directory \code{mkdir fstDir}
                 \item<5-> Whats the difference between
@@ -78,11 +78,11 @@ user@192.168.3.221's password:
                 \item<1-> \code{drwxr-xr-xr-x 2 test test 4096 2010-08-03 13:58 fstDir}
 				\item<2-> what are these informations all about?\\
                 $\underbrace{\code{d}}_{\text{\tiny{type}}}
-                \underbrace{\code{rwx}}_{\text{\tiny{owner perm.}}}\ \ 
+                \underbrace{\code{rwx}}_{\text{\tiny{user perm.}}}\ \ 
                 \underbrace{\code{r-x}}_{\text{\tiny{group perm.}}}\ \ 
-                \underbrace{\code{r-x}}_{\text{\tiny{all perm.}}}\ \
+                \underbrace{\code{r-x}}_{\text{\tiny{other perm.}}}\ \
                 \underbrace{\code{2}}_{\text{\tiny{\# links}}}\ \ 
-                \underbrace{\code{test}}_{\text{\tiny{owner}}}\ 
+                \underbrace{\code{test}}_{\text{\tiny{user}}}\ 
                 \underbrace{\code{test}}_{\text{\tiny{group}}}$ \\
                 $\underbrace{\code{4096}}_{\text{\tiny{size}}}\ 
                 \underbrace{\code{2010-08-03}}_{\text{\tiny{date last altered}}}\ 
@@ -114,11 +114,27 @@ user@192.168.3.221's password:
                     w & write & alter the file & create files/dir \\
                     x & execute & execute a file & enter the directory
                 \end{tabular}
+                \item<2-> Change the permissions \\
+                To change the permission use \code{chmod}
+                \begin{itemize}
+                    \item<3-> User: \code{chmod u=rwx file} or \code{u-r} or \code{u+x}
+                    \item<4-> Group / other: \code{g=} / \code{o=}
+                \end{itemize}
+                \item<5-> Change the group: \code{chgrp \textless group\textgreater file}
             \end{itemize}
 		\end{frame}
-    \subsection{Examples}
+\section{Doing}
+    \subsection{Basic commands}
         \begin{frame}
-			\frametitle{create, move, remove, read and write}
+			\frametitle{cd, move and remove}
+			\begin{itemize}
+                \item<1-> \textbf{C}hange the \textbf{D}irectory \code{cd destination}
+                \item<1-> move (equal to rename) is \code{mv file file1}
+                \item<1-> remove (equal to rename) is \code{rm file}
+            \end{itemize}
+		\end{frame}
+        \begin{frame}
+			\frametitle{create, read and write}
 			\begin{itemize}
                 \item<1-> the simplest way to create a file is \code{touch file}
                 \item<2-> if you want to edit it you use \code{vim file}
@@ -132,25 +148,51 @@ user@192.168.3.221's password:
                     \item<6-> its possible to do \code{:wq}
                 \end{itemize}
             \end{itemize}
-		\end{frame}
-        \begin{frame}
-			\frametitle{create, move, remove, read and write}
-			\begin{itemize}
-                \item<1-> move (equal to rename) is \code{mv file file1}
-                \item<1-> remove (equal to rename) is \code{rm file}
-            \end{itemize}
-		\end{frame}
-        
+		\end{frame}        
+    \subsection{practical}
         \begin{frame}
 			\frametitle{lets play}
 			\begin{itemize}
-                \item<1-> \textbf{C}hange the \textbf{D}irectory \code{cd /home/test/linuxLab/}
+                \item<1-> change to \code{/var/linuxLab}
                 \item<2-> have a look around, what do you see
                 \item<3-> try this in the current and in the subdirs
                 \begin{enumerate}
                     \item<4-> create a file named as your user 
                     \item<4-> insert your full name to it (use vim)
                     \item<5-> add 1 to the name (rename it to \textless username\textgreater 1)
+                    \item<6-> add your name into yout neighbours file
+                \end{enumerate}
+            \end{itemize}
+		\end{frame}
+        \begin{frame}
+			\frametitle{schedule}
+			\begin{itemize}
+                \item<1-> lets pin down our leactures during the week
+                \begin{enumerate}
+                    \item<1-> create a folder as your username \code{/var/linuxLab/\textless user\textgreater}
+                    \item<2-> create a folder for each day of the week
+                    \item<3-> create a file which contains the leactures and times in the day-folders
+                \end{enumerate}
+            \end{itemize}
+		\end{frame}
+    \subsection{additional}
+        \begin{frame}
+			\frametitle{lazy linux}
+			\begin{itemize}
+                \item<1-> help! I need somebody!
+                \begin{enumerate}
+                    \item<2-> The parameter \code{--help} give you a short explaination
+                    \item<3-> \code{man \textless command\textgreater} gives you the full information
+                \end{enumerate}
+                \item<4-> commands \& parameters
+                \begin{enumerate}
+                    \item<5-> if you type \code{!!} you got the last command 
+                    \item<6-> if you type \code{!\$} you got the last parameter (really the last)
+                \end{enumerate}
+                \item<7-> cd
+                \begin{enumerate}
+                    \item<8-> type \code{cd} to change to your home
+                    \item<9-> type \code{cd -} to change to the previous path you where in
                 \end{enumerate}
             \end{itemize}
 		\end{frame}
