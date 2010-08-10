@@ -1,5 +1,5 @@
-%\documentclass[hyperref={pdfpagelabels=false}]{beamer}
-\documentclass[draft,handout]{beamer}
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+%\documentclass[handout]{beamer}
 \let\Tiny=\tiny
 \hypersetup{pdfpagemode=FullScreen}
 \usepackage[ngerman]{babel}
@@ -23,7 +23,7 @@
 \author{Christian Kniep}
 
 \begin{document}
-\title[Linux Lab Unit 2]{Linux Lab Unit 2}  
+\title[Linux Lab Unit 2]{Linux Lab Unit 2 \\ textmanipulation, pipes, output}  
 \institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
 \date[\today]{\today} 
 
@@ -36,34 +36,108 @@
 	\tableofcontents
 \end{frame} 
 
-\section{Handle the output}
-    \subsection{stdout,stderr}
-        \begin{frame}
-			\frametitle{output,pipes}
+\section{Filesystem} 
+	\subsection{searching}
+		\begin{frame}
+			\frametitle{updatedb,root}
 			\begin{itemize}
-                \item<1-> if you fire a command the output will go trough the Terminal
-                \item<2-> dump it
+				\item<1-> \code{updatedb} create an index of the whole directory-tree
+                \item<2-> So you have to be some superuser
                 \begin{itemize}
-                    \item<2-> a new file \code{ls -l \textgreater list}
-                    \item<3-> append it to a file \code{ls -l \textgreater\textgreater list}
+                    \item<2-> The superuse root has no permission-restrictions
+                    \item[$\Rightarrow$]<3-> You can't hide from him!
+                    \item<4-> Due to security only root can change the owner of a file/directory
                 \end{itemize}
-                \item<4-> if you want to process it, pipe it in another process \code{ls -l |}
-                \begin{itemize}
-                    \item<4-> search for line with pattern \code{ls -l |grep pattern}
-                    \item<5-> the first two lines of the output \code{ls -l |head -n2}
-                    \item<6-> the last two lines of the output 
-                    \item<7-> \code{ls -l |tail -n2}
-                \end{itemize}
-                
             \end{itemize}
         \end{frame}
-        \begin{frame}
-			\frametitle{environment}
+		\begin{frame}[fragile]
+			\frametitle{updatedb,root}
 			\begin{itemize}
-                \item<1-> Where are all the commands located?
-                \item[$\Rightarrow$]<2-> depends :) Mostly \code{/bin}, \code{/usr/bin}, \code{/usr/local/bin}
-                \item<3-> But how does Linux know where to look?
-                \item[$\Rightarrow$]<2-> Environment. Try \code{echo \$PATH}
+                \item<1-> if a superuser has performed \code{updatedb} you can locate things:
+                    \begin{verbatim}
+debian1:/var/linuxLab# locate Network
+/var/linuxLab/irene/wednesday/ComputerNetwork
+\end{verbatim}
+                \item<2-> Please search for \code{bandung} and discuss the problem with \code{updatedb}
+                \begin{enumerate}
+                    \item<3-> You will find this \code{/var/linuxLab/additional/bandung}
+                    \item<4-> But you are not supposed to see it:
+                        \begin{verbatim}
+stella@debian1:~$ ls /var/linuxLab/additional/bandung
+ls: /var/linuxLab/additional/bandung: Permission denied
+stella@debian1:~$ ls /var/linuxLab/additional
+ls: /var/linuxLab/additional: Permission denied
+\end{verbatim}
+                \end{enumerate}
+            \end{itemize}
+		\end{frame}
+		\begin{frame}[fragile]
+			\frametitle{find}
+			\begin{itemize}
+                \item<1-> \code{find} searches \texttt{live}
+                    \begin{verbatim}
+debian1:/var/linuxLab/additional# find ./
+./
+./bandung
+./testDir
+./testDir/testFile
+\end{verbatim}
+                \item<2-> use the manpage / help to search
+                \begin{enumerate}
+                    \item<2-> find only folders in \code{/var/linuxLab/\textless YOU\textgreater}
+                    \item<3-> find only files in \code{/var/linuxLab/\textless YOU\textgreater}
+                    \item<4-> search for files which belongs to your user in \code{/var/linuxLab/}
+                \end{enumerate}
+            \end{itemize}
+		\end{frame}
+\section{Handle the output}
+    \subsection{only last,first}
+        \begin{frame}
+			\frametitle{tail,head}
+			\begin{itemize}
+                \item<1-> if you only want to see the last 10 lines of a file: \code{tail file}
+                \item<2-> the first 10 lines of a file: \code{head file}
+                \item<3-> both provides \code{-n} to provide the amount of lines,e.g. \code{-n50}
+                \item<4-> also often used to wait for changes: \code{-F}
+                \item<5-> Lets play with it \code{/var/linuxLab/unit2/linenumbers.txt}
+                \begin{enumerate}
+                    \item<5-> view the last 15 lines
+                    \item<6-> view the first 15 lines 
+                    \item<7-> view the lines 20-25
+                    \item<8-> use \code{-F} to wait for changes
+                \end{enumerate}
+            \end{itemize}
+        \end{frame}
+    \subsection{seperate lines}
+        \begin{frame}
+			\frametitle{grep}
+			\begin{itemize}
+                \item<1-> to search for patterns within files you use \code{grep \textless pattern\textgreater file}
+                \item<2-> try to find the pattern 25 in the previous used file \code{linenumbers.txt}
+                \item<3-> try to find your username in the directory \code{/var/log/}, \\
+                        for this use \code{grep -R \textless user\textgreater\ \textless path\textgreater *}
+            \end{itemize}
+        \end{frame}
+    \subsection{redirect output}
+        \begin{frame}
+			\frametitle{output}
+			\begin{itemize}
+                \item<1-> To redirect the output into a file use \code{\textgreater} \\
+                        e.g. \code{ls -l \textgreater\ file}
+                \item<2-> what is the difference between \code{\textgreater} and \code{\textgreater \textgreater}?
+                \item<3-> actually there are to different outputs:
+                \begin{itemize}
+                    \item[stdout]<3-> thats the normal output shown by the program
+                    \item[stderr]<3-> warnings and errors
+                \end{itemize}
+                \item<4-> \code{stdout} is refered to with \code{1\textgreater}, \code{stederr} with \code{2\textgreater}
+                \item<5-> lets try it:
+                \begin{enumerate}
+                    \item<5-> \code{ls /var/linuxLab/unit2/*}
+                    \item<6-> \code{ls /var/linuxLab/unit2/*\ 1\textgreater\ out }
+                    \item<7-> \code{ls /var/linuxLab/unit2/*\ 2\textgreater\ err }
+                    \item<8-> \code{ls /var/linuxLab/unit2/*\ 1\textgreater\ out\ 2\textgreater\ err}
+                \end{enumerate}
             \end{itemize}
         \end{frame}
     

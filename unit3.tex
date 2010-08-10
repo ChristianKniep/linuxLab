@@ -1,0 +1,120 @@
+%\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[handout]{beamer}
+\let\Tiny=\tiny
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{verbatim}
+%\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Boadilla}
+
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+\useinnertheme{rounded}
+\useoutertheme{smoothbars}
+%\useoutertheme{sidebar}
+
+\definecolor{lGray}{gray}{.90}
+\newcommand{\code}[1]{\colorbox{lGray}{\texttt{#1}}}
+
+\author{Christian Kniep}
+
+\begin{document}
+\title[Linux Lab Unit 2]{Linux Lab Unit 3 \\ Errorcode, Shellscripting}  
+\institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
+\date[\today]{\today} 
+
+\begin{frame}
+	\titlepage
+\end{frame} 
+
+\begin{frame}
+	\frametitle{Table of content}
+	\tableofcontents
+\end{frame} 
+
+\section{Shell-Scripting}
+    \subsection{automate things}
+    \begin{frame}{Create sheudle-Environment}
+        \begin{itemize}
+            \item<1-> instead of execute the commands you could write them in a textfile and execute them once
+            \item<2-> create a file \code{myScript.sh} in your home thats supposed to do
+            \begin{enumerate}
+                \item<2-> Change to \code{/var/linuxLab/unit3}
+                \item<3-> create a directory thats named with your username
+                \item<4-> create folders 'monday' to 'tuesday'
+            \end{enumerate}
+        \end{itemize}
+    \end{frame}
+\section{Errorcode} 
+	\subsection{Introduction}
+		\begin{frame}[fragile]
+			\frametitle{find}
+			\begin{itemize}
+				\item<1-> Every command you execute gives back an errorcode from 0-255
+                \item<2-> if everything went alright it will be 0
+                \item<3-> The other values are free to set
+                \item<4-> You can get the EC to the variable 
+                    \begin{verbatim}
+$ ls -l unit3.tex 
+-rw-r--r--  1 kniepbert  staff  1245 10 Aug 21:34 unit3.tex
+$ echo $?
+0
+$ ls -l unitX.tex 
+ls: unitX.tex: No such file or directory
+$ echo $?
+1
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+    \subsection{test}
+		\begin{frame}[fragile]
+            \frametitle{better way to check}
+			\begin{itemize}
+                \item<1-> To test in the filesystem there is a better way...
+                \item<2-> You wouldnt get output, so its easier to handle
+                \item<3-> say hello to \code{test}
+                    \begin{verbatim}
+$ test -e unit3.tex 
+$ echo $?
+0
+$ test -e unit3.texs 
+$ echo $?
+1
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+\section{variables}
+    \subsection{normal assignment}
+        \begin{frame}
+            \begin{itemize}
+                \item<1-> s
+            \end{itemize}
+        \end{frame}
+    \subsection{assign output}
+        \begin{frame}
+            \begin{itemize}
+                \item<1-> \code{x=`whoami`}
+            \end{itemize}
+        \end{frame}
+\section{comparisions}
+    \subsection{dunno}
+		\begin{frame}[fragile]
+            \frametitle{better way to check}
+			\begin{itemize}
+                \item<1-> it should look like:
+                    \begin{verbatim}
+if [ CONDITION ]
+    then
+        CONSEQUENCE
+    else
+        ALTERNATIVE
+    fi
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+
+\end{document}
