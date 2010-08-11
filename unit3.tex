@@ -1,5 +1,5 @@
-%\documentclass[hyperref={pdfpagelabels=false}]{beamer}
-\documentclass[handout]{beamer}
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+%\documentclass[handout]{beamer}
 \let\Tiny=\tiny
 \hypersetup{pdfpagemode=FullScreen}
 \usepackage[ngerman]{babel}
@@ -45,14 +45,14 @@
             \begin{enumerate}
                 \item<2-> Change to \code{/var/linuxLab/unit3}
                 \item<3-> create a directory thats named with your username
-                \item<4-> create folders 'monday' to 'tuesday'
+                \item<4-> create folders 'monday' to 'friday'
             \end{enumerate}
         \end{itemize}
     \end{frame}
 \section{Errorcode} 
 	\subsection{Introduction}
 		\begin{frame}[fragile]
-			\frametitle{find}
+			\frametitle{errorcode}
 			\begin{itemize}
 				\item<1-> Every command you execute gives back an errorcode from 0-255
                 \item<2-> if everything went alright it will be 0
@@ -85,25 +85,47 @@ $ test -e unit3.texs
 $ echo $?
 1
 \end{verbatim}
+                \item<4-> For all the different test read \code{man test}
             \end{itemize}
 		\end{frame}
 \section{variables}
     \subsection{normal assignment}
-        \begin{frame}
-            \begin{itemize}
-                \item<1-> s
-            \end{itemize}
-        \end{frame}
-    \subsection{assign output}
-        \begin{frame}
-            \begin{itemize}
-                \item<1-> \code{x=`whoami`}
-            \end{itemize}
-        \end{frame}
-\section{comparisions}
-    \subsection{dunno}
 		\begin{frame}[fragile]
-            \frametitle{better way to check}
+            \frametitle{variable=value}
+			\begin{itemize}
+                \item<1-> To assign a varbiable with normal values type:
+                    \begin{verbatim}
+$ var=1
+$ echo ${var}
+1
+$ var = 1
+-bash: var: command not found
+$ var="Hello World"
+$ echo ${var}
+Hello World
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+
+    \subsection{assign output}
+		\begin{frame}[fragile]
+            \frametitle{var=`cmd`}
+			\begin{itemize}
+                \item<1-> To assing the \textbf{stdout} use \code{var=`cmd`}
+                \item<2-> The stderr will not be assing
+                    \begin{verbatim}
+$ ls
+unit1.tex unit2.tex unit3.tex
+$ var=`ls`
+$ echo ${var}
+unit1.tex unit2.tex unit3.tex
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+\section{conditional programming}
+    \subsection{if-then-else}
+		\begin{frame}[fragile]
+            \frametitle{basic}
 			\begin{itemize}
                 \item<1-> it should look like:
                     \begin{verbatim}
@@ -114,6 +136,41 @@ if [ CONDITION ]
         ALTERNATIVE
     fi
 \end{verbatim}
+            \end{itemize}
+		\end{frame}
+		\begin{frame}[fragile]
+            \frametitle{example}
+			\begin{itemize}
+                \item<1-> if file exists then echo yes, no instead
+                    \begin{verbatim}
+$ touch test.txt
+$ if [ -e test.txt ]
+>    then
+>        echo 'yes'
+>    else
+>        echo 'no'
+>    fi
+yes
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+		\begin{frame}[fragile]
+            \frametitle{example compare variables}
+			\begin{itemize}
+                \item<1-> some variable-comparisons
+                    \begin{verbatim}
+$ x=1
+$ y=2
+$ if [ x == y ]
+>    then
+>        echo 'yes'
+>    else
+>        echo 'no'
+>    fi
+no
+\end{verbatim}
+            \item<2-> all possible conditions in \code{man test}
+            \item<3-> note that the condition 'string-equal' is describted as '=', usualy its '==' which works in bash also.
             \end{itemize}
 		\end{frame}
 

@@ -39,7 +39,7 @@
                                 {1ex plus .2ex}%
                                 {\normalfont\small\bfseries}}
 % Special commands
-\newcommand{\code}[1]{\underline{\texttt{#1}}}
+\newcommand{\code}[1]{\texttt{#1}}
 
 \makeatother
 
@@ -85,10 +85,78 @@ short       & long & file & dir \\ \hline
 \verb!x!    & execute & execute it & enter it
 \end{tabular}
 \subsection{ls-command}
-\code{-rw-r--r--  1 kniepbert  staff  26910  4 Aug 08:24 unit1.pdf}
+\code{-rw-r--r-- 1 kniepbert staff 10  4 Aug 08:24 unit1.pdf}
 
-
-
+\section{Misc}
+\subsection{Oneliner}
+To concatenate commands in one line use \code{\&\&} and \code{;}
+\begin{tabular}{ll}
+\verb!cmd1 && cmd2! & fires cmd2 if cmd1 was successfull  \\
+\verb!cmd1 ; cmd2! & fires cmd2 whatever result cmd1 has   
+\end{tabular}
+\subsection{Errorcode}
+Every command gives back an Errorcode between 0-255. If everything went alright its 0.
+Its stored in the Variable \code{\$?}. \\
+\begin{lstlisting}
+$ touch test ; echo $?
+0
+$ ls test ; echo $?
+ls: test: No such file or directory
+1
+\end{lstlisting}
+Within your own script you could create an errorcode with \code{exit VALUE}
+\subsection{variables}
+You could assign values or stdout to variables. Don't use blanks! 
+\begin{lstlisting}
+$ var=1 ; echo ${var}
+1
+$ var = 1
+-bash: var: command not found
+$ var="Hello World" ; echo ${var}
+Hello World
+$ ls
+unit1.tex unit2.tex unit3.tex
+$ var=`ls`
+$ echo ${var}
+unit1.tex unit2.tex unit3.tex
+\end{lstlisting}
+\section{Compare}
+\subsection{if-then-else}
+To check a condition and act acording to the result use if-then-else:
+\begin{lstlisting}
+if [ CONDITION ]
+    then
+        CONSEQUENCE
+    else
+        ALTERNATIVE
+    fi
+\end{lstlisting}
+if there is only one command after then/else
+\begin{lstlisting}
+if [ CONDITION ]
+    then CONSEQUENCE
+    else ALTERNATIVE
+    fi
+\end{lstlisting}
+for linebreaks use \code{;}
+\begin{lstlisting}
+if [ CONDITION ]; then cmd1; else cmd2; fi
+\end{lstlisting}
+\subsection{conditions}
+use \code{test} to check and compare. Have a look at the manpage to list all posibile checks.
+\begin{lstlisting}
+$ if [ -e test ];then echo '1';else echo '0';fi
+no
+$ touch test
+$ if [ -e test ];then echo '1';else echo '0';fi
+yes
+$ if [ 1 -eq 1 ];then echo '1';else echo '0';fi
+yes
+$ if [ 2 -eq 1 ];then echo '1';else echo '0';fi
+no
+$ if [ 'Hi'=='Hi' ];then echo '1';else echo '0';fi
+yes
+\end{lstlisting}
 
 \end{multicols}
 \end{document}
