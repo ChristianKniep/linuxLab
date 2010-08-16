@@ -173,5 +173,88 @@ no
             \item<3-> note that the condition 'string-equal' is describted as '=', usualy its '==' which works in bash also.
             \end{itemize}
 		\end{frame}
+\section{Constructs}
+    \subsection{Functions}
+        \begin{frame}[fragile]{quick example}
+			\begin{itemize}
+                \item<1-> lets define a simple function:
+                    \begin{verbatim}
+$ function func { 
+>   echo $1
+>   }
+$ func "Hello World"
+Hello World
+$ func Hello World
+Hello
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+        \begin{frame}[fragile]{equal}
+			\begin{itemize}
+                \item<1-> lets define a simple function:
+                    \begin{verbatim}
+$ function equal {
+>   if [ $1 == $2 ];then
+>     echo 1
+>   else
+>     echo 0
+>   fi
+> }
+$ equal 1 1
+1
+$ equal 1 0
+0
+$ 
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+    \subsection{for}
+        \begin{frame}[fragile]{quick example}
+			\begin{itemize}
+                \item<1-> for iterates...
+                    \begin{verbatim}
+$ for item in `ls`;do echo $item;done 
+Desktop
+Documents
+Downloads
+Library
+Movies
+Music
+Pictures
+Public
+Sites
+doc\end{verbatim}
+            \end{itemize}
+		\end{frame}
+        \begin{frame}[fragile]{uses output of ls to iterate}
+			\begin{itemize}
+                \item<1-> if we want to use for to check all dirnames
+                    \begin{verbatim}
+$ function dirExists {
+>   for item in `ls .`;do
+>       if [ $1 == $item ];then
+>           echo 'found it'
+>           fi
+>       done
+>   }
+$ dirExists Music
+found it
+$ dirExists Musik
+$  
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+                
+        \begin{frame}{back to the schedule-example}
+			\begin{itemize}
+                \item<1-> Change teh example-Script that it matches teh following goals:
+                \begin{enumerate}
+                    \item<1-> includes a function that creates and checks the result
+                    \item<1-> creates template-files (morning,lunch,afternoon)
+                    \item<1-> creates a seperate logfile,where the actions and whether it was successful is stored 
+                \end{enumerate}
+            \end{itemize}
+		\end{frame}
+        
 
 \end{document}
