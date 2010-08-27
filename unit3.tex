@@ -40,11 +40,11 @@
     \subsection{automate things}
     \begin{frame}{Create sheudle-Environment}
         \begin{itemize}
-            \item<1-> instead of execute the commands you could write them in a textfile and execute them once
+            \item<1-> instead of execute the commands you could write them in a textfile and execute them at once
             \item<2-> create a file \code{myScript.sh} in your home thats supposed to do
             \begin{enumerate}
                 \item<2-> Change to \code{/var/linuxLab/unit3}
-                \item<3-> create a directory thats named with your username
+                \item<3-> create a directory thats named as your user
                 \item<4-> create folders 'monday' to 'friday'
             \end{enumerate}
         \end{itemize}
@@ -243,15 +243,14 @@ $ dirExists Musik
 $  
 \end{verbatim}
             \end{itemize}
-		\end{frame}
-                
+		\end{frame}                
         \begin{frame}{back to the schedule-example}
 			\begin{itemize}
-                \item<1-> Change teh example-Script that it matches teh following goals:
+                \item<1-> Change your \code{MyScript.sh}-Script that it matches teh following goals:
                 \begin{enumerate}
                     \item<1-> includes a function that creates and checks the result
-                    \item<1-> creates template-files (morning,lunch,afternoon)
-                    \item<1-> creates a seperate logfile,where the actions and whether it was successful is stored 
+                    \item<2-> creates template-files (morning,lunch,afternoon)
+                    \item<3-> creates a seperate logfile,where the actions and whether it was successful is stored 
                 \end{enumerate}
             \end{itemize}
 		\end{frame}

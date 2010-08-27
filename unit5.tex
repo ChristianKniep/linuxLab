@@ -1,0 +1,92 @@
+%\documentclass[draft,hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[handout]{beamer}
+\let\Tiny=\tiny
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{verbatim}
+%\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Boadilla}
+
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+\useinnertheme{rounded}
+\useoutertheme{smoothbars}
+%\useoutertheme{sidebar}
+
+\definecolor{lGray}{gray}{.90}
+
+\newcommand{\code}[1]{\colorbox{lGray}{\texttt{#1}}}
+\author{Christian Kniep}
+
+\begin{document}
+\title{linuxLab Unit 5 \\ practise scripting}  
+\institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
+\date[\today]{\today} 
+
+\begin{frame}
+	\titlepage
+\end{frame} 
+
+
+\section{Continue}
+    \subsection{writeLines.sh}
+        \begin{frame}{what is missing?}
+			\begin{itemize}
+				\item<1-> create a script \code{writeLines} that reads whole lines from stdin and put them into a file.
+                \item<2-> use keyword as first word to control what the script is doing:
+                \begin{itemize}
+                    \item<2-> maybe use \code{:append:} to append the following line
+                    \item<2-> \code{:create:} to create a new file
+                    \item<2-> \code{:exit:} to quit
+                    \item<2-> ...
+                \end{itemize}
+            \end{itemize}
+		\end{frame}
+\section{Kernel and shells}
+    \subsection{Kernel}
+        \begin{frame}{Bootup}
+            \begin{itemize}
+                \item<1-> After the boot-up (powerbutton) the BIOS checks some stuff
+                \item<2-> The BIOS searches for a little fraction on the HD called MBR
+                \item<3-> The MBR contains a referenz to the kernel and an initial filesystem (initrd)
+                \item<4-> Since the kernel is started it communicates with the hardware and is kind of the puppetmaster
+            \end{itemize}
+        \end{frame}
+\section{Practise Scripting} 
+ 	\subsection{some useful commands}
+		\begin{frame}[fragile]{split strings}
+			\begin{itemize}
+                \item<1-> Normaly you have 8 terminals docked onto the kernel (F1-F8)
+                \item<2-> The first 6 are commandlines the other usualy graphical
+                \item<3-> The login-screen is called getty and the terminals are configured in the \code{/etc/inittab}
+                \begin{verbatim}
+1:2345:respawn:/sbin/getty 38400 tty1
+*snipp*
+6:23:respawn:/sbin/getty 38400 tty6
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+    \subsection{Shells}
+        \begin{frame}{Why do we need Shells?}
+            \begin{itemize}
+                \item<1-> Talk to the kernel is like talking to the supernerd
+                \item[$\Rightarrow$]<2-> Shells like in \code{/etc/passwd}
+                \item<2-> The shell provides
+                \begin{enumerate}
+                    \item<3-> Command line interpretation
+                    \item<4-> Program initiation
+                    \item<5-> input-output redirection
+                    \item<6-> Pipeline connection
+                    \item<7-> Substitution of filenames
+                    \item<8-> Maintenance of variables
+                    \item<9-> Environment control
+                    \item<10-> Shell proraming
+                \end{enumerate}
+            \end{itemize}
+        \end{frame}
+    
+\end{document}

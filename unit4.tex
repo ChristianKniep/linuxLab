@@ -1,0 +1,75 @@
+%\documentclass[draft,hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[handout]{beamer}
+\let\Tiny=\tiny
+\hypersetup{pdfpagemode=FullScreen}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{verbatim}
+%\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Boadilla}
+
+\usecolortheme{beaver}
+\usefonttheme{professionalfonts}
+\useinnertheme{rounded}
+\useoutertheme{smoothbars}
+%\useoutertheme{sidebar}
+
+\definecolor{lGray}{gray}{.90}
+
+\newcommand{\code}[1]{\colorbox{lGray}{\texttt{#1}}}
+\author{Christian Kniep}
+
+\begin{document}
+\title{linuxLab Unit 4 \\ practise scripting}  
+\institute[ICAT Bandung]{Internation Center of Applied Technologies Bandung}
+\date[\today]{\today} 
+
+\begin{frame}
+	\titlepage
+\end{frame} 
+
+
+\section{Practise Scripting} 
+ 	\subsection{some useful commands}
+		\begin{frame}[fragile]{split strings}
+			\begin{itemize}
+				\item<1-> If you want to split a string you could use \code{cut}
+                \begin{verbatim}
+echo 'Hello World' | cut -d ' ' -f1
+echo 'Hello_World' | cut -d '_' -f1
+\end{verbatim}
+            \item<2-> if you want to get user-input you use \code{read}
+            \begin{verbatim}
+$ read x
+Hallo
+$ echo ${x} 
+Hallo
+\end{verbatim}
+            \end{itemize}
+		\end{frame}
+	\subsection{example}
+		\begin{frame}{find file}
+			\begin{itemize}
+				\item<1-> create a script \code{fileInfo.sh} that gets a name and gives the path of the name and the owner of it.
+                \begin{itemize}
+                    \item<1-> Use \code{locate}, \code{ls -l} and \code{cut}
+                \end{itemize}
+            \end{itemize}
+		\end{frame}
+		\begin{frame}{}
+			\begin{itemize}
+				\item<1-> create a script \code{writeLines} that reads whole lines from stdin and put them into a file.
+                \item<2-> use keyword as first word to control what the script is doing:
+                \begin{itemize}
+                    \item<2-> maybe use \code{:append:} to append the following line
+                    \item<2-> \code{:create:} to create a new file
+                    \item<2-> \code{:exit:} to quit
+                    \item<2-> ...
+                \end{itemize}
+            \end{itemize}
+		\end{frame}
+
+\end{document}
