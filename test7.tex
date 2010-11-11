@@ -1,0 +1,110 @@
+\documentclass[11pt]{article}
+\usepackage{url}
+
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{color}
+
+\author{Christian Kniep}
+\title{linuxLab Unit 7}
+\date{\today}
+%----------------------------
+\begin{document}
+\maketitle
+\section*{linuxLab Test}
+If there is now value in braces then you will earn 1 point per default
+\subsection*{1. commands}
+\begin{enumerate}
+    \item Write down the command you will use to... (0.5 each)
+    \begin{enumerate}
+        \item create a directory:
+        \item create a file:
+        \item redirect the listing of the current directory to a file:\\
+        \item rm a file:
+        \item rm a directory:
+        \item change permissions (just the basic command)
+        \item change the user
+    \end{enumerate}
+    \item What are the two commands we discussed to search for files or directorys? (2)
+    \item What is the difference?
+\end{enumerate}
+\newpage
+\subsection*{2. Manipulate the output}
+\begin{enumerate}
+    \item The file \texttt{file.txt} contains the linenumerbs 1-10. Use pipes to get only the line 5 and 6 \\
+    \texttt{\$ cat file.txt}
+    \item There are 100 files in your current directory which contains different numbers. What is the command to find the file(s) which contains 3153? (1.5)\\
+    \texttt{\$}
+    \item What is the difference between (0.5 each):
+    \begin{enumerate}
+        \item \texttt{\textgreater}
+        \item \texttt{\textgreater\textgreater}
+        \item \texttt{1\textgreater}
+        \item \texttt{2\textgreater}
+    \end{enumerate}
+\end{enumerate}
+\newpage
+\subsection*{3. folders and directorys}
+\begin{enumerate}
+    \item Write down the lines nesseccary to create the following structure:
+    \begin{enumerate}
+        \item Making sure you are in your home-directory (0.5)
+        \item Creating a directory dir1 and subdirectorys dir1.1 and dir1.2 
+        \item Create 30 empty files with a random filename within the two subdirectorys (1.5) \\
+        \\
+        \\
+        \\
+        \\
+        \\
+    \end{enumerate} 
+    \item Give a short description of the different blocks of the output: (2) \\
+    \texttt{drwxr-xr-x 2 test test 4096 2010-08-03 13:58 fstDir} \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \item How to change the permissions of fstDir to the following (0.5 each):
+    \begin{enumerate}
+        \item \texttt{drwxrw-rw-}: \texttt{\$}
+        \item \texttt{drwx------}: \texttt{\$}
+        \item \texttt{drw-r--r--}: \texttt{\$}
+    \end{enumerate}
+\newpage
+\subsection{4. Environment}
+\begin{enumerate}
+    \item What is the purpose of the environment? (2) \\
+    Hint: Why do you need variables like \$PATH,\$OLDPWD?
+    \item How could you manipulate the apearance of your prompt? \\
+    \\
+    \item What are errorcodes for? \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \item Assign the errorcode to the variable ec. If ec equals 0 print 'OK' to stdout. (2) \\
+    \\
+    \\
+    \\
+    \\
+\subsection*{5. Structures}
+\begin{enumerate}
+    \item Please write down a example of an 'if, then, else'-construct where 0 is compared to 0. (2) \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \\
+    \item and the for-construct? Please add the code for printing every item to stdout... (2) \\
+    \texttt{\$ for item in 1 2 3 4;}
+\end{enumerate}
+\end{enumerate}
+    
+\end{enumerate}
+\end{document}
